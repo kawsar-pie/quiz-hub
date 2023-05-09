@@ -7,7 +7,7 @@ const QuizDetail = () => {
     const data = useLoaderData().data;
     let marks = 0;
     const questions = data.questions;
-    console.log(questions)
+    // console.log(questions);
     const [questionNo, setQuestionNo] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const goToNextQuestion = () => {
@@ -16,12 +16,12 @@ const QuizDetail = () => {
     const goToPreviousQuestion = () => {
         if (questionNo > 0) setQuestionNo(questionNo - 1);
     }
-    for(let i=0;i<questions.length;i+=1){
-        if(questions[i].correctAnswer === selectedAnswers[questions[i].id]) marks+=1;
+    for (let i = 0; i < questions.length; i += 1) {
+        if (questions[i].correctAnswer === selectedAnswers[questions[i].id]) marks += 1;
     }
     // console.log(marks);
     return (
-        <AnswersContext.Provider value={[marks,selectedAnswers, setSelectedAnswers]}>
+        <AnswersContext.Provider value={[marks, selectedAnswers, setSelectedAnswers]}>
             <div className='quiz-detail'>
                 <h1>{data.name} Quiz Questions</h1>
                 <div className='questions-container'>
