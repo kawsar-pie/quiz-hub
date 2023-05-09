@@ -12,7 +12,6 @@ const Question = ({ question, questionNo, options, correctAnswer , goToNextQuest
         //     alert("Wrong")
         // }
     }
-    
     return (
         <div className='question-body'>
             <h2>Quiz {questionNo + 1}: </h2><h3>{question}</h3>
@@ -39,10 +38,6 @@ const Question = ({ question, questionNo, options, correctAnswer , goToNextQuest
                     <button className='submit' onClick={goToNextQuestion}>Next</button>
                     {/* <button type="submit" className='submit' disabled={!selectedAnswer}>Submit</button> */}
                 </form>
-
-                {/* {
-                    selectedAnswer
-                } */}
             </div>
         </div >
     );
