@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Question.css'
-import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
-const Question = ({ question, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
+import { AnswersContext } from '../QuizDetail/QuizDetail';
+const Question = ({ question, questionId, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
-
+    const [marks, selectedAnswers, setSelectedAnswers] = useContext(AnswersContext);
     function handleSubmit(event) {
         event.preventDefault();
-        if (selectedAnswer === correctAnswer) {
-            alert("Correct");
-        }
-        else {
-            alert("Wrong")
-        }
+        alert(`You Got ${marks} marks`);
+        console.log(selectedAnswers);
+        // if (selectedAnswer === correctAnswer) {
+        //     alert(`You Got ${marks} marks`);
+        // }
+        // else {
+        //     alert("Wrong")
+        // }
+    }
+    const handleSelectedAnswers = (questionId, option) => {
+        setSelectedAnswers((prevSelectedAnswers) => ({
+            ...prevSelectedAnswers,
+            [questionId]: option,
+        }));
     }
     return (
         <div className='question-body'>
@@ -19,31 +27,20 @@ const Question = ({ question, questionNo, options, correctAnswer, goToNextQuesti
             <div>
                 <form onSubmit={handleSubmit}>
                     <span className='all-options'>
-                        {options.map((option, id) => <h4 className={`single-option ${selectedAnswer === option ? 'selected-option' : ""}`}>
-                            <input
-                                type='radio'
-                                id={id}
-                                name="answer"
-                                value={option}
-                                // checked={selectedAnswer === option}
-                                // onChange={(event) => setSelectedAnswer(event.target.value)}
-                                onClick={(event) => setSelectedAnswer(event.target.value)}
-                            // className='radio-button'
-                            />
-                            <span className='flex'><div className={`${selectedAnswer === option ? 'option-no-clicked' : "option-no"}`}>{String.fromCharCode(id + 65)}</div><div>{option}</div></span>
-                            {/* <button className='single-option' onClick={(event) => setSelectedAnswer(event.target.value)}>
-                                    {option}
-                                </button> */}
+                        {options.map((option, id) => <h4 className={`${selectedAnswer === option ? 'single-option selected-option' : "single-option"}`}>
+                            <div className='option-field'>
+                                <div className={`${selectedAnswer === option ? 'option-no-clicked' : "option-no"}`}>{String.fromCharCode(id + 65)}</div>
+                                <p className='text' onClick={(event) => setSelectedAnswer(event.target.innerText)}>{option}</p>
+                            </div>
                         </h4>)}
                         {correctAnswer}
+                        {selectedAnswer}
                     </span>
                     <div className='prev-next'>
-                        <span className={`submit ${questionNo === 0 ? 'd-none' : ""}`} onClick={goToPreviousQuestion}>Previous</span>
-                        <span className={`submit ${questionNo === totalQuestion - 1 ? 'd-none' : ""}`} onClick={goToNextQuestion}>Next</span>
-                        <button type="submit" className={`submit ${questionNo === totalQuestion - 1 ? '' : "d-none"}`} disabled={!selectedAnswer}>Submit</button>
+                        <span className={`${questionNo === 0 ? 'submit d-none' : "submit"}`} onClick={goToPreviousQuestion}>Previous</span>
+                        <span className={`${questionNo === totalQuestion - 1 ? 'submit d-none' : "submit"}`} onClick={() => { goToNextQuestion(); handleSelectedAnswers(questionId, selectedAnswer) }}>Next</span>
+                        <button type="submit" onClick={() => handleSelectedAnswers(questionId, selectedAnswer)} className={`${questionNo === totalQuestion - 1 ? 'submit' : "submit d-none"}`} disabled={!selectedAnswer}>Submit</button>
                     </div>
-
-
                 </form>
             </div>
         </div >

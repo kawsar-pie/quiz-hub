@@ -1,41 +1,45 @@
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import './QuizDetail.css';
 import Question from '../Question/Question';
+export const AnswersContext = createContext({});
 const QuizDetail = () => {
     const data = useLoaderData().data;
+    let marks = 0;
     const questions = data.questions;
-    console.log(questions);
+    console.log(questions)
     const [questionNo, setQuestionNo] = useState(0);
-
+    const [selectedAnswers, setSelectedAnswers] = useState({});
     const goToNextQuestion = () => {
-        if (questionNo < questions.length-1) setQuestionNo(questionNo + 1);
+        if (questionNo < questions.length - 1) setQuestionNo(questionNo + 1);
     }
     const goToPreviousQuestion = () => {
         if (questionNo > 0) setQuestionNo(questionNo - 1);
     }
+    for(let i=0;i<questions.length;i+=1){
+        if(questions[i].correctAnswer === selectedAnswers[questions[i].id]) marks+=1;
+    }
+    // console.log(marks);
     return (
-        <div className='quiz-detail'>
-            <h1>{data.name} Quiz Questions</h1>
-            <div className='questions-container'>
-                {
-                    // questions.map((question,q_no) => <Question key={question.id}
-                    //     question={question.question}
-                    //     options={question.options}
-                    //     correctAnswer={question.correctAnswer}
-                    //     questionNo={q_no}></Question>)
-                    <Question
-                        question={questions[questionNo].question}
-                        options={questions[questionNo].options}
-                        correctAnswer={questions[questionNo].correctAnswer}
-                        questionNo={questionNo}
-                        goToNextQuestion={goToNextQuestion}
-                        goToPreviousQuestion={goToPreviousQuestion}
-                        totalQuestion={questions.length}></Question>
-                }
+        <AnswersContext.Provider value={[marks,selectedAnswers, setSelectedAnswers]}>
+            <div className='quiz-detail'>
+                <h1>{data.name} Quiz Questions</h1>
+                <div className='questions-container'>
+                    {
+                        <Question
+                            question={questions[questionNo].question}
+                            options={questions[questionNo].options}
+                            correctAnswer={questions[questionNo].correctAnswer}
+                            questionNo={questionNo}
+                            goToNextQuestion={goToNextQuestion}
+                            goToPreviousQuestion={goToPreviousQuestion}
+                            totalQuestion={questions.length}
+                            questionId={questions[questionNo].id}></Question>
+                    }
+                </div>
             </div>
+        </AnswersContext.Provider>
 
-        </div>
     );
 };
 
