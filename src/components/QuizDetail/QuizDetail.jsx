@@ -9,7 +9,10 @@ const QuizDetail = () => {
     const [questionNo, setQuestionNo] = useState(0);
 
     const goToNextQuestion = () => {
-        setQuestionNo(questionNo+1);
+        if (questionNo < questions.length-1) setQuestionNo(questionNo + 1);
+    }
+    const goToPreviousQuestion = () => {
+        if (questionNo > 0) setQuestionNo(questionNo - 1);
     }
     return (
         <div className='quiz-detail'>
@@ -26,7 +29,9 @@ const QuizDetail = () => {
                         options={questions[questionNo].options}
                         correctAnswer={questions[questionNo].correctAnswer}
                         questionNo={questionNo}
-                        goToNextQuestion={goToNextQuestion}></Question>
+                        goToNextQuestion={goToNextQuestion}
+                        goToPreviousQuestion={goToPreviousQuestion}
+                        totalQuestion={questions.length}></Question>
                 }
             </div>
 

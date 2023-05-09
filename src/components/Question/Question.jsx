@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import './Question.css'
-const Question = ({ question, questionNo, options, correctAnswer , goToNextQuestion}) => {
+import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
+const Question = ({ question, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
-        // if (selectedAnswer === correctAnswer) {
-        //     alert("Correct");
-        // }
-        // else {
-        //     alert("Wrong")
-        // }
+        if (selectedAnswer === correctAnswer) {
+            alert("Correct");
+        }
+        else {
+            alert("Wrong")
+        }
     }
     return (
         <div className='question-body'>
@@ -34,9 +35,15 @@ const Question = ({ question, questionNo, options, correctAnswer , goToNextQuest
                                     {option}
                                 </button> */}
                         </h4>)}
+                        {correctAnswer}
                     </span>
-                    <button className='submit' onClick={goToNextQuestion}>Next</button>
-                    {/* <button type="submit" className='submit' disabled={!selectedAnswer}>Submit</button> */}
+                    <div className='prev-next'>
+                        <span className={`submit ${questionNo === 0 ? 'd-none' : ""}`} onClick={goToPreviousQuestion}>Previous</span>
+                        <span className={`submit ${questionNo === totalQuestion - 1 ? 'd-none' : ""}`} onClick={goToNextQuestion}>Next</span>
+                        <button type="submit" className={`submit ${questionNo === totalQuestion - 1 ? '' : "d-none"}`} disabled={!selectedAnswer}>Submit</button>
+                    </div>
+
+
                 </form>
             </div>
         </div >
