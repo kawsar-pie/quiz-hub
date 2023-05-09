@@ -1,5 +1,5 @@
 .hub {
-    background-color: #98fcb4;
+    background-color: #71ef95;
     padding: 5px 10px;
     border-radius: 5px;
     color: #f0f8ff;
@@ -13,7 +13,7 @@
 
 .header a {
     text-decoration: none;
-    color: black;
+    color: #71ef95;
 }
 
 .routes {
@@ -21,6 +21,7 @@
     align-items: center;
     font-weight: 700;
     font-size: large;
+    
 }
 
 .routes p {
@@ -31,7 +32,7 @@
     border-bottom: #caf7d7 solid 5px;
 }
 
-.active{
+.active {
     border-bottom: #80f3a0 solid 5px;
 }
 

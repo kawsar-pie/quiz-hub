@@ -5,10 +5,10 @@ const Header = () => {
     return (
         <div className='header'>
             <div className='quiz-hub'>
-                <NavLink to='/'><h2>Quiz <span className='hub'>Hub</span></h2></NavLink>
+                <NavLink to='/'><h1 style={{color:"#71ef95"}}>Quiz <span className='hub'>Hub</span></h1></NavLink>
             </div>
-            <div className='routes d-flex justify-content-between'>
-                <p><NavLink to='/' className={({ isActive }) =>
+            <div className='routes'>
+                <p><NavLink to='/home' className={({ isActive }) =>
                     isActive ? "active" : ""}>Home</NavLink></p>
                 <p><NavLink to='/analytics' className={({ isActive }) =>
                     isActive ? "active" : ""}>Analytics</NavLink></p>
