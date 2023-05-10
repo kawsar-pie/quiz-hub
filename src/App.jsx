@@ -49,7 +49,14 @@ function App() {
         }
       ]
     },
-    
+    {
+      path: "*",
+      element:
+        <div>
+          <h2>Oops!</h2>
+          <h3>404 Error! Route Not Found!</h3>
+        </div>
+    }
   ])
   return (
     <div className="App">
