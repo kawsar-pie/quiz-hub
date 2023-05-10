@@ -18,36 +18,38 @@ function App() {
         {
           path: '/',
           element: <Home></Home>,
-          loader: ()=> fetch('https://openapi.programming-hero.com/api/quiz')
+          loader: () => fetch('https://openapi.programming-hero.com/api/quiz')
         },
         {
           path: '/home',
           element: <Home></Home>,
-          loader: ()=> fetch('https://openapi.programming-hero.com/api/quiz')
+          loader: () => fetch('https://openapi.programming-hero.com/api/quiz')
         },
         {
           path: '/analytics',
-          element: <Analytics></Analytics>
+          element: <Analytics></Analytics>,
+          loader: () => fetch('https://openapi.programming-hero.com/api/quiz')
         },
         {
           path: '/blog',
           element: <Blog></Blog>
         },
-        {
-          path: '/about',
-          element: <About></About>
-        },
+        // {
+        //   path: '/about',
+        //   element: <About></About>
+        // },
         {
           path: '/quizes/:quizId',
           element: <QuizDetail></QuizDetail>,
-          loader: ({params})=> fetch(`https://openapi.programming-hero.com/api/quiz/${params.quizId}`)
+          loader: ({ params }) => fetch(`https://openapi.programming-hero.com/api/quiz/${params.quizId}`)
         },
         {
-          path:'/quizes/:quizId/result',
+          path: '/result',
           element: <Result></Result>
         }
       ]
-    }
+    },
+    
   ])
   return (
     <div className="App">

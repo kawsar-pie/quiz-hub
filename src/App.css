@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  /* color: #71ef95; */
+  vertical-align: middle;
+  color: #71ef95;
 }
 
 .App-logo {
@@ -33,6 +34,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -6,11 +6,11 @@ import { QuizContext } from '../Quiz/Quiz';
 const Question = ({ question, questionId, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [marks, selectedAnswers, setSelectedAnswers] = useContext(AnswersContext);
-    const quiz = useContext(QuizContext);
+    const [quizId] = useContext(QuizContext);
     function handleSubmit(event) {
         event.preventDefault();
         alert(`You Got ${marks} marks`);
-        console.log(selectedAnswers);
+        // console.log(selectedAnswers);
         // if (selectedAnswer === correctAnswer) {
         //     alert(`You Got ${marks} marks`);
         // }
@@ -23,6 +23,7 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
             ...prevSelectedAnswers,
             [questionId]: option,
         }));
+        setSelectedAnswer("");
     }
     return (
         <div className='question-body'>
@@ -40,9 +41,21 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
                         {selectedAnswer}
                     </span>
                     <div className='prev-next'>
-                        <span className={`${questionNo === 0 ? 'submit d-none' : "submit"}`} onClick={goToPreviousQuestion}>Previous</span>
-                        <span className={`${questionNo === totalQuestion - 1 ? 'submit d-none' : "submit"}`} disabled={!selectedAnswer} onClick={() => { goToNextQuestion(); handleSelectedAnswers(questionId, selectedAnswer) }}>Next</span>
-                        <button type="submit" onClick={() => handleSelectedAnswers(questionId, selectedAnswer)} className={`${questionNo === totalQuestion - 1 ? 'submit' : "submit d-none"}`} disabled={!selectedAnswer}><Link to={`/quizes/${quiz.id}/result`}>Submit</Link></button>
+                        <span className={`${questionNo === 0 ? 'submit d-none' : "submit"}`}
+                            onClick={goToPreviousQuestion}>Previous</span>
+                        <span className={`${questionNo === totalQuestion - 1 ? 'submit d-none' : "submit"}`}
+                            disabled={selectedAnswer === ""}
+                            onClick={() => { goToNextQuestion(); handleSelectedAnswers(questionId, selectedAnswer) }}>
+                            Next</span>
+                        <span className={`${questionNo === totalQuestion - 1 ? '' : "d-none"}`}>
+                            <Link to={`/result`}>
+                                <button type="submit"
+                                    className='submit'
+                                    onClick={() => handleSelectedAnswers(questionId, selectedAnswer)}
+                                    disabled={selectedAnswer === ""}
+                                >Submit</button>
+                            </Link>
+                        </span>
                     </div>
                 </form>
             </div>
