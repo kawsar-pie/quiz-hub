@@ -2,12 +2,14 @@ import React, { createContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import './QuizDetail.css';
 import Question from '../Question/Question';
-export const AnswersContext = createContext({});
+import Result from '../Result/Result';
+export const AnswersContext = createContext([]);
 const QuizDetail = () => {
     const data = useLoaderData().data;
     let marks = 0;
     const questions = data.questions;
     // console.log(questions);
+    const [submit, setSubmit] = useState(false);
     const [questionNo, setQuestionNo] = useState(0);
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const goToNextQuestion = () => {
@@ -21,23 +23,27 @@ const QuizDetail = () => {
     }
     // console.log(marks);
     return (
-        <AnswersContext.Provider value={[marks, selectedAnswers, setSelectedAnswers]}>
-            <div className='quiz-detail'>
-                <h1>{data.name} Quiz Questions</h1>
-                <div className='questions-container'>
-                    {
-                        <Question
-                            question={questions[questionNo].question}
-                            options={questions[questionNo].options}
-                            correctAnswer={questions[questionNo].correctAnswer}
-                            questionNo={questionNo}
-                            goToNextQuestion={goToNextQuestion}
-                            goToPreviousQuestion={goToPreviousQuestion}
-                            totalQuestion={questions.length}
-                            questionId={questions[questionNo].id}></Question>
-                    }
-                </div>
-            </div>
+        <AnswersContext.Provider value={[submit, setSubmit, marks, selectedAnswers, setSelectedAnswers]}>
+            {
+                submit ? <Result marks={marks} quiz={data.name}></Result> :
+                    <div className='quiz-detail'>
+                        <h1>{data.name} Quiz Questions</h1>
+                        <div className='questions-container'>
+                            {
+                                <Question
+                                    question={questions[questionNo].question}
+                                    options={questions[questionNo].options}
+                                    correctAnswer={questions[questionNo].correctAnswer}
+                                    questionNo={questionNo}
+                                    goToNextQuestion={goToNextQuestion}
+                                    goToPreviousQuestion={goToPreviousQuestion}
+                                    totalQuestion={questions.length}
+                                    questionId={questions[questionNo].id}></Question>
+                            }
+                        </div>
+                    </div>
+            }
+
         </AnswersContext.Provider>
 
     );

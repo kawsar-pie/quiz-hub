@@ -1,0 +1,9 @@
+.see-answer {
+    border: 2px solid #5fff8d;
+    border-radius: 5px;
+    padding:3px 10px 3px 10px;
+    color: #71ef95;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+}

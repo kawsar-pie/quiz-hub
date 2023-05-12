@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
 import { AnswersContext } from '../QuizDetail/QuizDetail';
 import { QuizContext } from '../Quiz/Quiz';
-
-const Result = () => {
-    const [marks, selectedAnswers, setSelectedAnswers] = useContext(AnswersContext);
-    // const quiz = useContext(QuizContext);
+import './Result.css'
+import { Link } from 'react-router-dom';
+const Result = ({ quiz, marks }) => {
+    console.log(quiz);
     return (
-        <div>
-            <h2>Wow! You Got {marks} marks on quiz. Keep practicing...</h2>
+        <div className='result'>
+            <h1 className='congo'>Congratulations!</h1>
+            <h2 className='mark-detail'>You Got <span className='quiz-marks-name'>{marks} marks</span> on <span className='quiz-marks-name'>{quiz}</span> quiz.</h2>
+            <Link to={`/home`} style={{textDecoration:"none"}}>
+                <div className='keep-practicing'>
+                    Keep practicing
+                </div>
+            </Link>
         </div>
     );
 };

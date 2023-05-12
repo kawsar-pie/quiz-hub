@@ -1,10 +1,11 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 import './Quiz.css'
 import { Link } from 'react-router-dom';
-export const QuizContext = createContext([]);
+export const QuizContext = createContext(undefined);
 const Quiz = ({ quiz }) => {
+    const [currentQuiz, setCurrentQuiz] = useState(quiz.name);
     return (
-        <QuizContext.Provider value={[quiz.id]}>
+        <QuizContext.Provider value={currentQuiz}>
             <div className='quiz shadow-lg shadow-cyan-500/50'>
                 <img src={`/images/${quiz.name}.png`} alt="" />
                 <div className='quiz-details'>

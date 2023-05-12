@@ -20,7 +20,7 @@ const Analytics = () => {
 
     return (
         <div>
-            <h2>This is Analytics of Topics vs Total Quizes.</h2>
+            <h2>This is an Analytics of Topics vs Total Quizes.</h2>
             <BarChart
                 width={1150}
                 height={500}
