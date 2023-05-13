@@ -1,5 +1,5 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import './CheckAnswer.css'
 import 'react-toastify/dist/ReactToastify.css';
 const CheckAnswer = ({ answer, selectedAnswer }) => {
@@ -12,10 +12,11 @@ const CheckAnswer = ({ answer, selectedAnswer }) => {
     }
     // console.log(answer, selectedAnswer);
     return (
-        <div onClick={notify}>
-            <p className='check-answer'>Check Answer</p>
-            <ToastContainer />
-        </div>
+        <>
+            <div onClick={notify}>
+                <p className='check-answer'>Check Answer</p>
+            </div>
+        </>
     );
 };
 

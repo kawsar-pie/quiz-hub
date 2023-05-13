@@ -3,6 +3,7 @@ import './Question.css'
 import { AnswersContext } from '../QuizDetail/QuizDetail';
 import SeeAnswer from '../SeeAnswer/SeeAnswer';
 import CheckAnswer from '../CheckAnswer/CheckAnswer';
+import { ToastContainer } from 'react-toastify';
 const Question = ({ question, questionId, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [submit, setSubmit, marks, selectedAnswers, setSelectedAnswers] = useContext(AnswersContext);
@@ -65,6 +66,7 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
                     </div>
                 </form>
             </div>
+            <ToastContainer />
         </div >
     );
 };
