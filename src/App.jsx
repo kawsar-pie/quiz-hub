@@ -1,13 +1,12 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Main from './Layout/Main';
 import Home from './components/Home/Home';
 import Analytics from './components/Analytics/Analytics';
 import Blog from './components/Blog/Blog';
-import About from './components/About/About';
 import QuizDetail from './components/QuizDetail/QuizDetail';
 import Result from './components/Result/Result';
+import ErrorPage from './components/ErrorPage/ErrorPage';
 
 function App() {
   const router = createBrowserRouter([
@@ -47,16 +46,17 @@ function App() {
           path: '/result',
           element: <Result></Result>
         }
-      ]
+      ],
+      errorElement: <ErrorPage></ErrorPage>
     },
-    {
-      path: "*",
-      element:
-        <div>
-          <h2>Oops!</h2>
-          <h3>404 Error! Route Not Found!</h3>
-        </div>
-    }
+    // {
+    //   path: "*",
+    //   element:
+    //     <div>
+    //       <h2>Oops!</h2>
+    //       <h3>404 Error! Route Not Found!</h3>
+    //     </div>
+    // }
   ])
   return (
     <div className="App">
