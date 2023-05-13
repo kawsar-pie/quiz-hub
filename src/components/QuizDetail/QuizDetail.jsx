@@ -27,7 +27,7 @@ const QuizDetail = () => {
             {
                 submit ? <Result marks={marks} quiz={data.name}></Result> :
                     <div className='quiz-detail'>
-                        <h1>{data.name} Quiz Questions</h1>
+                        <h1><span className='quiz-name-top'>{data.name} Quiz</span></h1>
                         <div className='questions-container'>
                             {
                                 <Question

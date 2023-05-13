@@ -1,6 +1,11 @@
-.quiz-detail{
+.quiz-detail {
     color: #5afd88;
 }
-.questions-container{
-    /* display: block; */
+
+.quiz-name-top {
+    background-color: #71ef95;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #f0f8ff;
+    /* font-size: xx-large; */
 }

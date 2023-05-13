@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Question.css'
 import { AnswersContext } from '../QuizDetail/QuizDetail';
-import { Link } from 'react-router-dom';
-import { QuizContext } from '../Quiz/Quiz';
 import SeeAnswer from '../SeeAnswer/SeeAnswer';
 import CheckAnswer from '../CheckAnswer/CheckAnswer';
 const Question = ({ question, questionId, questionNo, options, correctAnswer, goToNextQuestion, goToPreviousQuestion, totalQuestion }) => {
@@ -11,7 +9,6 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
 
     function handleSubmit(event) {
         event.preventDefault();
-        //alert(`You Got ${marks} marks`);
     }
 
     const handleSelectedAnswers = (questionId, option) => {
@@ -19,17 +16,16 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
             ...prevSelectedAnswers,
             [questionId]: option,
         }));
-        //setSelectedAnswer("");
     }
 
-    const seperateOptionText = (optionText, optionNo) => {
-        const index = optionText.indexOf(optionNo);
-        console.log(optionText, optionNo, index)
-        if (index !== -1) {
-            return optionText.slice(index + 3);
-        }
-        return optionText;
-    }
+    // const seperateOptionText = (optionText, optionNo) => {
+    //     const index = optionText.indexOf(optionNo);
+    //     console.log(optionText, optionNo, index)
+    //     if (index !== -1) {
+    //         return optionText.slice(index + 3);
+    //     }
+    //     return optionText;
+    // }
 
     return (
         <div className='question-body'>
@@ -44,10 +40,7 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
                                 <div className={`${selectedAnswers[questionId] === option ? 'option-no-clicked' : "option-no"}`}>{String.fromCharCode(id + 65)}</div>
                                 <p className='text'>{option}</p>
                             </div>
-                            {/* <h1 style={{ background: "blue" }}>{selectedAnswer === option}</h1> */}
                         </h4>)}
-                        {/* <div style={{ background: "red" }}>{correctAnswer}</div>
-                        <div style={{ background: "blue" }}>{selectedAnswer}</div> */}
                     </span>
                     <div className='check-see-answer'>
                         <SeeAnswer answer={correctAnswer}></SeeAnswer>
@@ -70,7 +63,6 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
                             >Submit</button>
                         </span>
                     </div>
-
                 </form>
             </div>
         </div >
@@ -78,7 +70,3 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
 };
 
 export default Question;
-
-// setSelectedAnswer(seperateOptionText(event.target.innerText, String.fromCharCode(id + 65)));
-// seperateOptionText(event.target.innerText, String.fromCharCode(id + 65))
-// onClick={() => { handleSelectedAnswers(questionId, selectedAnswers[questionId]) }}
