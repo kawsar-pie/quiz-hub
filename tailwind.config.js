@@ -3,9 +3,9 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: {
-    extend: {},
+  daisyui: {
+    themes: ["light", "dark", "emerald"],
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 

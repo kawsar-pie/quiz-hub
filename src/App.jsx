@@ -7,6 +7,8 @@ import Blog from './components/Blog/Blog';
 import QuizDetail from './components/QuizDetail/QuizDetail';
 import Result from './components/Result/Result';
 import ErrorPage from './components/ErrorPage/ErrorPage';
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
 
 function App() {
   const router = createBrowserRouter([
@@ -45,6 +47,14 @@ function App() {
         {
           path: '/result',
           element: <Result></Result>
+        },
+        {
+          path: '/register',
+          element: <Register></Register>
+        },
+        {
+          path: '/login',
+          element: <Login></Login>
         }
       ],
       errorElement: <ErrorPage></ErrorPage>
