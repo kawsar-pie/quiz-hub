@@ -4,7 +4,7 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   daisyui: {
-    themes: ["light", "dark", "emerald"],
+    themes: ["light", "dark", "emerald", "lemonade"],
   },
   plugins: [require("daisyui")],
 }

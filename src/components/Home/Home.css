@@ -9,6 +9,8 @@
     gap:10px;
 }
 
+
+
 @media only screen and (max-width: 767px) {
     .quizes{
         margin:20px;

@@ -19,25 +19,17 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
         }));
     }
 
-    // const seperateOptionText = (optionText, optionNo) => {
-    //     const index = optionText.indexOf(optionNo);
-    //     console.log(optionText, optionNo, index)
-    //     if (index !== -1) {
-    //         return optionText.slice(index + 3);
-    //     }
-    //     return optionText;
-    // }
 
     return (
         <div className='question-body'>
-            <span><h2>Quiz {questionNo + 1}: </h2><h3>{question}</h3></span>
+            <span className='font-bold text-xl mt-6 mb-2'><h2>Quiz {questionNo + 1}: </h2><h3>{question}</h3></span>
             <div>
                 <form onSubmit={handleSubmit}>
                     <span className='all-options'>
                         {options.map((option, id) => <h4 key={id}
                             onClick={(event) => { handleSelectedAnswers(questionId, option); }}
                             className={`${selectedAnswers[questionId] === option ? 'single-option selected-option' : "single-option"}`}>
-                            <div className='option-field' >
+                            <div className='font-bold option-field' >
                                 <div className={`${selectedAnswers[questionId] === option ? 'option-no-clicked' : "option-no"}`}>{String.fromCharCode(id + 65)}</div>
                                 <p className='text'>{option}</p>
                             </div>
@@ -53,14 +45,12 @@ const Question = ({ question, questionId, questionNo, options, correctAnswer, go
                         {/* <SeeAnswer></SeeAnswer>
                         <CheckAnswer></CheckAnswer> */}
                         <span className={`${questionNo === totalQuestion - 1 ? 'submit d-none' : "submit"}`}
-                            //disabled={selectedAnswer === ""}
                             onClick={() => { goToNextQuestion(); }}>
                             Next</span>
                         <span className={`${questionNo === totalQuestion - 1 ? '' : "d-none"}`}>
                             <button type="submit"
                                 className='submit'
                                 onClick={() => { setSubmit(true); }}
-                            //disabled={selectedAnswer === ""}
                             >Submit</button>
                         </span>
                     </div>

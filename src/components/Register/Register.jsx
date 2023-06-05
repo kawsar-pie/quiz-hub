@@ -1,11 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle } from "react-icons/fa";
 import { useContext } from 'react';
 import { AuthContext } from '../UserContext/UserContext';
 
 const Register = () => {
-    const { createUser, googleSignIn } = useContext(AuthContext);
+    const { createUser, googleSignIn, updateUserProfile } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -16,14 +19,23 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 form.reset();
+                updateUserProfile(name)
+                    .then(() => {
+                        console.log("Profile Updated")
+                    }).catch((error) => {
+                        console.log(error.message)
+                    });
                 console.log(user);
+                navigate(from, { replace: true });
             })
             .catch(err => console.log(err.message));
+
     }
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true });
                 console.log(user);
             })
             .catch(err => {

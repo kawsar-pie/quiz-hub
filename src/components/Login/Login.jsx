@@ -2,8 +2,12 @@ import React from 'react';
 import { useContext } from 'react';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../UserContext/UserContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
     const { googleSignIn, signIn } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state?.from?.pathname || "/";
     const handleSubmit = event => {
         event.preventDefault();
         const form = event.target;
@@ -13,6 +17,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 form.reset();
+                navigate(from, { replace: true });
                 console.log(user);
             })
             .catch(err => {
@@ -23,6 +28,7 @@ const Login = () => {
         googleSignIn()
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true });
                 console.log(user);
             })
             .catch(err => console.log(err.message)

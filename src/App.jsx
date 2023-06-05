@@ -9,6 +9,7 @@ import Result from './components/Result/Result';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   const router = createBrowserRouter([
@@ -28,7 +29,7 @@ function App() {
         },
         {
           path: '/analytics',
-          element: <Analytics></Analytics>,
+          element: <PrivateRoute><Analytics></Analytics></PrivateRoute>,
           loader: () => fetch('https://openapi.programming-hero.com/api/quiz')
         },
         {
@@ -41,7 +42,7 @@ function App() {
         // },
         {
           path: '/quizes/:quizId',
-          element: <QuizDetail></QuizDetail>,
+          element: <PrivateRoute><QuizDetail></QuizDetail></PrivateRoute>,
           loader: ({ params }) => fetch(`https://openapi.programming-hero.com/api/quiz/${params.quizId}`)
         },
         {

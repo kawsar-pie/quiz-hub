@@ -26,9 +26,9 @@ const QuizDetail = () => {
         <AnswersContext.Provider value={[submit, setSubmit, marks, selectedAnswers, setSelectedAnswers]}>
             {
                 submit ? <Result marks={marks} quiz={data.name}></Result> :
-                    <div className='quiz-detail'>
-                        <h1><span className='quiz-name-top'>{data.name} Quiz</span></h1>
-                        <div className='questions-container'>
+                    <div className='quiz-detail my-5 mb-5'>
+                        <h1><span className='quiz-name-top text-3xl font-bold'>{data.name} Quiz</span></h1>
+                        <div className='questions-container my-5'>
                             {
                                 <Question
                                     question={questions[questionNo].question}
